@@ -1,7 +1,7 @@
 // app/layout.tsx
 import './globals.css';
 import Providers from '../providers'; 
-import CountPage from './dashboard/@count/page';
+import CountPage from './dashboard/@locations/page';
 
 export const metadata = {
   title: 'Octso',
