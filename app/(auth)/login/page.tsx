@@ -1,15 +1,13 @@
-"use client";
-
+"use client"
 import React, { useState } from 'react';
 import { Input, Button, Spinner } from '@nextui-org/react';  
 import Link from 'next/link';
 import axios from 'axios';
 import { API_URL } from '@/constants';
-import { useRouter } from 'next/router';
-
+import { useRouter } from 'next/navigation';
 const LoginPage = () => {
   const [submitting, setSubmitting] = useState(false); 
-  const router = useRouter()
+  const router = useRouter(); 
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -27,7 +25,7 @@ const LoginPage = () => {
         { ...authData },
         { withCredentials: true }
       );
-      if(response.status ==201) router.push('/dashboard')
+      if(response.status === 201) router.push('/dashboard');
       setSubmitting(false);
       
     } catch (e) {

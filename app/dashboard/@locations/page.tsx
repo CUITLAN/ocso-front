@@ -1,18 +1,32 @@
 import axios from 'axios'
 import { cookies } from 'next/headers'
 import {TOKEN_NAME} from '@/constants'
-import { div } from 'framer-motion/client'
-import { Select } from '@nextui-org/react'
-const CountPage = async () => {
+import { Location } from '@/entities'
+import SelectLocation from './_components/SelectLocations';
+import { useSearchParams } from 'next/navigation';
+
+const LocationsPage = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
     const userCookies = cookies()
     const token = userCookies.get(TOKEN_NAME) ?.value
-    const countLocations= await axios.get('http://127.0.0.1:3002/location',{
+    let {data}= await axios.get<Location[]>('http://127.0.0.1:3002/location',{
         headers: {
             Authorization: `Bearer ${token}`
         }
     })
-    const cantidad = countLocations?.data.length;
-    return <div className='w-2/12'> <Select>{}</Select> </div>
+    data = [
+        {locationId: 0, locationName: "Ninguna", locationLat: [0,0], locationAddres: ""},
+        ...data
+
+    ]
+    return ( 
+    <div className='w-8/12'> 
+        <div className='w-full h-[90vh] flex flex-col items-center bg-red-50'>
+            <div className='px-10 w-1/2 my-10'>
+            <SelectLocation locations={data} store={searchParams?.store}/>
+
+            </div>
+        </div>
+    </div>)
 }
 
-export default CountPage
+export default LocationsPage
