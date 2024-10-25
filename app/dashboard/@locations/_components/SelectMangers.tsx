@@ -10,10 +10,10 @@ interface selectmanagersprops {
 }
 
 export default function SelectManger({ managers, locations, defaultManager }: selectmanagersprops) {
-    const disabledKeys = locations
-        .map((location: Location) => location.manager?.managerId)
-        .filter((managerId) => managerId !== undefined);
-
+    const disabledKeys = locations.map((location: Location) => {
+        if(location.manager?.managerId == defaultManager) return location.manager?.managerId;
+    }).filter((managerId) => managerId !== undefined);
+    
     return (
         <Select
             defaultSelectedKeys={defaultManager ? [defaultManager] : []}

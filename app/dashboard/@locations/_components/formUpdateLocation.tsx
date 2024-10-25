@@ -1,12 +1,13 @@
 import { Button, Input, SelectSection } from "@nextui-org/react";
-import { createLocation } from "@/actions/locations/create";
 import { API_URL} from "@/constants";
 import SelectManger from "./SelectMangers";
 import authHeaders from "@/helpers/Auth.headers";
 import { Location, Manager } from "@/entities";
-export default async function FormUpdateLocation({store}:  {store:  string | string[] | undefined  }){
-    if(!store || store == undefined)return null;
+import {UpdateLocation} from "@/actions/locations/update"
 
+export default async function FormUpdateLocation({store}:  {store:  string | string[] | undefined  }){
+    if(!store || store == undefined || typeof store === "object")return null;
+    const updateWithStoreId = UpdateLocation.bind(null, store)
     const responseManagers = await fetch(`${API_URL}/manager`,{
         method: "GET",
         headers:{
@@ -33,14 +34,14 @@ export default async function FormUpdateLocation({store}:  {store:  string | str
     let foundManager=dataMangers.find((manager)=>manager.managerId === foundLocation?.manager?.managerId)
 
     return (
-        <form action={createLocation} className="bg-orange-400 py-2 px-2 flex flex-col gap-6 w-full rounded-lg">
+        <form action={updateWithStoreId} className="bg-orange-400 py-2 px-2 flex flex-col gap-6 w-full rounded-lg">
             <h1 className="text-xl text-white text-center">Crear Tiempo</h1>
-            <Input defaultValue={foundLocation?.locationName} label="Nombre de tienda "  placeholder="Tienda 1" name="locationName"/>
-            <Input defaultValue={foundLocation?.locationAddres} label="Direccion  " placeholder="Avenida de las Ciencias" name="locationAddres"/>
-            <Input defaultValue={foundLocation?.locationLat[0].toString()} label="Latitud " placeholder="20" name="locationLat"/>
-            <Input defaultValue={foundLocation?.locationLat[1].toString()} label="Longitud " placeholder="34" name="locationLng"/>
+            <Input required={true} defaultValue={foundLocation?.locationName} label="Nombre de tienda "  placeholder="Tienda 1" name="locationName"/>
+            <Input required={true} defaultValue={foundLocation?.locationAddres} label="Direccion  " placeholder="Avenida de las Ciencias" name="locationAddres"/>
+            <Input required={true} defaultValue={foundLocation?.locationLat[0].toString()} label="Latitud " placeholder="20" name="locationLat"/>
+            <Input required={true} defaultValue={foundLocation?.locationLat[1].toString()} label="Longitud " placeholder="34" name="locationLng"/>
             <SelectManger defaultManager={foundManager?.managerId} managers={dataMangers}  locations={dataLoctions}/>
-            <Button type="submit" color="primary"> subir</Button>
+            <Button type="submit" color="primary">Actualizar</Button>
         </form>
     )
 }
