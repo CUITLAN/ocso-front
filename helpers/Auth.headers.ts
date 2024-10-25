@@ -5,7 +5,6 @@ import React, { cache } from 'react'
 
 const authHeaders = cache (() => {
     const token = cookies().get(TOKEN_NAME)?.value;
-    console.log("Called");
   return {
     'Authorization': `Bearer ${token}`
   }

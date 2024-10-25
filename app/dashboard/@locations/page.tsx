@@ -1,6 +1,4 @@
-import axios from 'axios'
-import { cookies } from 'next/headers'
-import {TOKEN_NAME} from '@/constants'
+import {API_URL, TOKEN_NAME} from '@/constants'
 import { Location } from '@/entities'
 import SelectLocation from './_components/SelectLocations';
 import LocationCard from './_components/Location.card';
@@ -9,12 +7,15 @@ import DeleteLocationButton from './_components/DeleteLocationButton';
 import authHeaders from '@/helpers/Auth.headers';
 
 const LocationsPage = async ({ searchParams }: { searchParams: { [key: string]: string | string[] | undefined } }) => {
-    const userCookies = cookies()
-    let {data}= await axios.get<Location[]>('http://127.0.0.1:3002/location',{
+    const res =  await fetch(`${API_URL}/location`,{
         headers: {
            ...authHeaders()
+        },
+        next:{
+            tags: ["Dashboard:locations"]
         }
     })
+    let data: Location[] = await res.json()
     data = [
         {locationId: 0, locationName: "Ninguna", locationLat: [0,0], locationAddres: ""},
         ...data

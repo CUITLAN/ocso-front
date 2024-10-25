@@ -2,14 +2,13 @@
 import React, { useState } from 'react';
 import { Input, Button, Spinner } from '@nextui-org/react';  
 import Link from 'next/link';
-import axios from 'axios';
 import { API_URL } from '@/constants';
 import { useRouter } from 'next/navigation';
 const LoginPage = () => {
   const [submitting, setSubmitting] = useState(false); 
   const router = useRouter(); 
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault();
     setSubmitting(true);
 
@@ -20,11 +19,11 @@ const LoginPage = () => {
     };
 
     try {
-      const response = await axios.post(
-        `${API_URL}/auth/login`,
-        { ...authData },
-        { withCredentials: true }
-      );
+      const response = await fetch(`${API_URL}/auth/login`,{
+        method: "POST",
+        body:JSON.stringify(authData),
+        credentials: 'include',
+      });
       if(response.status === 201) router.push('/dashboard');
       setSubmitting(false);
       
