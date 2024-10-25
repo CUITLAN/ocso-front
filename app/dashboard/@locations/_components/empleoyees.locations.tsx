@@ -6,11 +6,9 @@ import { Card, CardBody, CardHeader, Divider } from "@nextui-org/react"
 
 export default  async function EmpleoyeesLocation ({store}: {store: string | string[] | undefined}) {
     const token = cookies().get(TOKEN_NAME)?.value
-    console.log('Token AQUI ESTA EL TOKEEEEEEN:', token);
     const {data} = await axios.get<Empleoyees[]>(`${API_URL}/empleoyees/location/${store}`,{
         headers:{Authorization: `Bearer ${token}`},
     })
-    console.log(data);
     if(!data) return null;
     
         return data.map((employee)=>{
