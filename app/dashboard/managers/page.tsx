@@ -1,11 +1,7 @@
-import React from 'react'
+const Managers_page = async  () => {
 
-const Managers_page = () => {
-  return (
-    <div>
-      
-    </div>
-  )
+  return null;
+  
 }
 
 export default Managers_page

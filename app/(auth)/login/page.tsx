@@ -17,16 +17,21 @@ const LoginPage = () => {
       userEmail: formData.get("userEmail"),
       userPassword: formData.get("userPassword"),
     };
+    console.log(formData);
 
     try {
       const response = await fetch(`${API_URL}/auth/login`,{
         method: "POST",
+        headers:{
+          "content-type": "application/json"
+        },
         body:JSON.stringify(authData),
         credentials: 'include',
       });
       if(response.status === 201) router.push('/dashboard');
       setSubmitting(false);
-      
+      console.log(response);
+
     } catch (e) {
       console.error("Error al iniciar sesión:", e);
       setSubmitting(false);
