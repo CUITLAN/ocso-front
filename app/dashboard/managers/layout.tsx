@@ -2,7 +2,7 @@ import { div } from "framer-motion/client";
 import ManagersCard from "./_components/managerCard";
 import { ReactNode } from "react";
 
-export default function Layout_Manager ({children}: {children: ReactNode}){
+export default function Layout_Manager ({children, count}: {children: ReactNode, count: ReactNode}){
 
     return (
         <>
@@ -10,9 +10,10 @@ export default function Layout_Manager ({children}: {children: ReactNode}){
                 <ManagersCard/>
                 
             </div>
-            <div>
-            {children}
+            <div className="w-7/12 items-center flex flex-col justify-center gap-10">
+                <div> {children} </div> <div> {count}</div>
             </div>
+            
         </>
     )
 }
