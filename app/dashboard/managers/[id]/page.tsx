@@ -1,10 +1,10 @@
 import { API_URL } from "@/constants";
 import { Manager } from "@/entities";
 import authHeaders from '@/helpers/Auth.headers';
-import { Card, CardBody, CardHeader, Divider } from '@nextui-org/react';
-import { p } from "framer-motion/client";
 import ManagerCardmini from "./_components/managerCardmini";
 import ManagerDeleteButtton from "../_components/DeleteManagerButton";
+import FormUpdateManager from "../_components/updateManager";
+import ModalUpdatemanager from "./_components/ModalUpdateManger";
 export default async function ManagerPage ({params}: {params: {id:string}}) {
     const res = await fetch (`${API_URL}/manager/${params.id}`,{
         headers:{
@@ -21,6 +21,9 @@ export default async function ManagerPage ({params}: {params: {id:string}}) {
         <ManagerCardmini manager={data}/>
         
         <div className="bg-gray-50 shadow-md rounded-md px-10 py-2">
+            <ModalUpdatemanager>
+                <FormUpdateManager manager={data}/>
+            </ModalUpdatemanager>
             <ManagerDeleteButtton managerid={data.managerId}/>
         </div>
        </div>
