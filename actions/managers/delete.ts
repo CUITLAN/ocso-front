@@ -3,8 +3,8 @@
 import { API_URL } from "@/constants";
 import authHeaders from "@/helpers/Auth.headers";
 import { revalidateTag } from "next/cache";
-
-export default async function createManagers(managerId: string, formData: FormData){
+import { redirect } from "next/navigation";
+export default async function DeleteManagers(managerId: string, formData: FormData){
 
 let manager: any = {}
 
@@ -20,6 +20,8 @@ let manager: any = {}
         headers: {...authHeaders()}
     })
     console.log(res.status);
-        revalidateTag("dashbaord:managers")
-    
+        if(res.status==201){
+            revalidateTag("dashbaord:managers")
+            redirect("/dashboard/managers")
+        }
 }

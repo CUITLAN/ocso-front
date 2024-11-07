@@ -4,7 +4,7 @@ import { API_URL } from "@/constants";
 import authHeaders from "@/helpers/Auth.headers";
 import { revalidateTag } from "next/cache";
 
-export default async function createManagers(managerId: string, formData: FormData){
+export default async function UpdateManagers(managerId: string, formData: FormData){
 
 let manager: any = {}
 
