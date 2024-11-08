@@ -12,6 +12,9 @@ export default async function ProviderPage() {
     headers: {
       ...authHeaders(),
     },
+    next:{
+      tags:["dashboard:providers"]
+    },
   });
   const provider: Providers[] = await res.json();
   return (

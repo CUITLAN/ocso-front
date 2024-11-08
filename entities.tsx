@@ -39,6 +39,6 @@ export interface Providers {
     providerName: string;
     providerEmail: String;
     providerPhoneNumber: string;
-    products: Product
+    products: Product[];
 }
 

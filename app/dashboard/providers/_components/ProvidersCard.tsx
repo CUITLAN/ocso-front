@@ -4,7 +4,7 @@ import { LuPlus } from "react-icons/lu";
 
 export default function ProvidersCards({ providers }: { providers: Providers }) {
     return (
-        <Card className="w-full min-w-[350px]">
+        <Card className="w-full min-w-[350px] max-w-[350px]">
             <CardHeader>
                 <b>{providers.providerName}</b>
             </CardHeader>
