@@ -18,6 +18,9 @@ const ManagerCardmini = ({ manager }: { manager: Manager }) => {
           <p className="w-full">
             Email: <b>{manager.managerEmail}</b>
           </p>
+          <p className='w-full'>
+            Salario: <b> {manager.managerSalary}</b>
+          </p>
           <p className="w-full">
             Teléfono: <b>{manager.managerPhoneNumber}</b>
           </p>

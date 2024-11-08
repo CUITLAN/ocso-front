@@ -26,7 +26,7 @@ const CountmManagersPage = async () => {
         <h1>Hay {managers.length} Manger {managers.length > 1 ? "S": " " }</h1>
         <h1>Hay {countNoStore} Sin tienda </h1>
         <h1>El salario maximo es  {max}  </h1>
-        <h1>El salario Promedio es  {(salary/managers.length)}  </h1>
+        <h1>El salario Promedio es  {(salary/managers.length).toFixed(2)}  </h1>
 
 
 

@@ -27,4 +27,18 @@ export interface Manager {
     location: Location;
     user : any;
 }
+export interface Product{
+    productId: string;
+    productName: string;
+    price: number;
+    countSeal: number;
+    provider?: Providers;
+}
+export interface Providers {
+    providerId: string;
+    providerName: string;
+    providerEmail: String;
+    providerPhoneNumber: string;
+    products: Product
+}
 

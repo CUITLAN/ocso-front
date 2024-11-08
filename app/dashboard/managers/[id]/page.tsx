@@ -20,7 +20,7 @@ export default async function ManagerPage ({params}: {params: {id:string}}) {
         
         <ManagerCardmini manager={data}/>
         
-        <div className="bg-gray-50 shadow-md rounded-md px-10 py-2">
+        <div className="bg-gray-50 shadow-md rounded-md px-10 py-2 flex flex-row flex-grow-0 gap-2">
             <ModalUpdatemanager>
                 <FormUpdateManager manager={data}/>
             </ModalUpdatemanager>

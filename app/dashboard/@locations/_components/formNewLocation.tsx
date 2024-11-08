@@ -1,9 +1,9 @@
 import { Button, Input, SelectSection } from "@nextui-org/react";
-import { createLocation } from "@/actions/locations/create";
 import { API_URL} from "@/constants";
 import SelectManger from "./SelectMangers";
 import authHeaders from "@/helpers/Auth.headers";
 import { Location, Manager } from "@/entities";
+import createLocation from "@/actions/locations/create";
 export default async function FormNewLocation({store}:  {store:  string | string[] | undefined  }){
     if(store) return null;
 
