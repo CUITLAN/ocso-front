@@ -32,7 +32,7 @@ export interface Product{
     productName: string;
     price: number;
     countSeal: number;
-    provider?: Providers;
+    provider: Providers;
 }
 export interface Providers {
     providerId: string;
