@@ -1,82 +1,57 @@
-"use client"
-import React, { useState } from 'react';
-import { Input, Button, Spinner } from '@nextui-org/react';  
-import Link from 'next/link';
-import { API_URL } from '@/constants';
-import { useRouter } from 'next/navigation';
-const LoginPage = () => {
-  const [submitting, setSubmitting] = useState(false); 
-  const router = useRouter(); 
+'use client';
+import Link from "next/link";
+import { Input, Button } from "@nextui-org/react";
+import { API_URL } from "@/constants";
+import { useState } from "react";
+import { useRouter } from "next/navigation";
 
-  const handleSubmit = async (e: any) => {
-    e.preventDefault();
+export default function LoginPage() {
+  const [submitting, setSubmitting] = useState(false)
+  const router = useRouter()
+  const handleSubmit = async (e : any) => {
     setSubmitting(true);
-
-    const formData = new FormData(e.currentTarget);
-    let authData: any = {
-      userEmail: formData.get("userEmail"),
-      userPassword: formData.get("userPassword"),
-    };
-    console.log(formData);
-
+    e.preventDefault()
+    const formData = new FormData(e.target);
+    let authData: any = {}
+    authData.userEmail = formData.get("userEmail");
+    authData.userPassword = formData.get("userPassword");
     try {
-      const response = await fetch(`${API_URL}/auth/login`,{
+      const response = await fetch(`${API_URL}/auth/login`, {
         method: "POST",
-        headers:{
-          "content-type": "application/json"
+        body: JSON.stringify(authData),
+        headers: {
+          "content-type": 'application/json'
         },
-        body:JSON.stringify(authData),
+        cache: "no-cache",
         credentials: 'include',
       });
-      if(response.status === 201) router.push('/dashboard');
-      setSubmitting(false);
-      console.log(response);
-
+      if (response.status === 201) router.push('/dashboard');
+      setSubmitting(false)
     } catch (e) {
-      console.error("Error al iniciar sesión:", e);
       setSubmitting(false);
     }
-  };
-
+    return;
+  }
   return (
-    <div className="bg-orange-500 px-10 py-2 rounded-md">
-      <div className="text-2xl md:text-white my-4">
-        Iniciar Sesión
+    <form className="bg-orange-500 px-10 py-2 rounded-md" onSubmit={handleSubmit}>
+      <p className="text-2xl my-4 text-white">
+        Iniciar sesión
+      </p>
+      <div className="flex flex-col gap-2 my-4 items-center">
+        <Input label="Email" name="userEmail" type="email" isRequired={true} size="sm" />
+        <Input label="Contraseña" name="userPassword" type="password" isRequired={true} size="sm" />
       </div>
-
-      <form onSubmit={handleSubmit} className="flex flex-col gap-2 my-4 items-center">
-        <Input
-          label="Email"
-          name="userEmail"
-          type="email"
-          isRequired
-          size="sm"
-          disabled={submitting}
-        />
-        <Input
-          label="Contraseña"
-          name="userPassword"
-          type="password"
-          isRequired
-          size="sm"
-          disabled={submitting}
-        />
-
-        <Button color="primary" type="submit" disabled={submitting}>
-          {submitting ? "Enviando..." : "Iniciar sesión"}
+      <div className="flex flex-col items-center gap-2">
+        <Button
+          color="primary"
+          type="submit"
+          disabled={submitting}>
+        {submitting ? "Enviando..." : "Iniciar Sesión"}
         </Button>
-      </form>
-
-      <div className="flex flex-col items-center gap-2 mt-4">
-        <p>
-          ¿Aún no tienes cuenta?{' '}
-          <Link href="/signup" className="text-red-600 underline">
-            Regístrate
-          </Link>
+        <p className="text-white">
+          ¿No tienes cuenta? <Link href="/signup" className="text-red-600 underline">Registrate</Link>
         </p>
       </div>
-    </div>
+    </form>
   );
-};
-
-export default LoginPage;
+}

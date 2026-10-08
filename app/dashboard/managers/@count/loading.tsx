@@ -1,7 +1,5 @@
-import React from 'react'
-import { Spinner } from '@nextui-org/react'
-const LoadingCountMangers = () => {
-  return <Spinner size="lg"/>
-}
+import { Spinner } from "@nextui-org/react";
 
-export default LoadingCountMangers
+export default function LoadingCountManagers() {
+  return <Spinner size="lg" />
+}

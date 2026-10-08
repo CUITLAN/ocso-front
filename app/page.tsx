@@ -1,9 +1,8 @@
-import EmpleoyeesLocation from "./dashboard/@locations/_components/empleoyees.locations";
 
-export default function Home({searchParams}: {searchParams: {[key: string]: string | string[] | undefined}}) {
+export default function Home() {
   return (
-   <div>
-      
-   </div>
+      <main className="flex min-h-screen flex-col items-center justify-between p-24">
+        El mejor texto
+      </main>
   );
 }
