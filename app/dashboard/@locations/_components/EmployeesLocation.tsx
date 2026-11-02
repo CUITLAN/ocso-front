@@ -16,6 +16,9 @@ export default async function EmployeesLocation({ store }: { store: string | str
     }
   });
   const data: Employee[] = await response.json()
+  if (!Array.isArray(data)) {
+  return <p className="text-center mt-10">No tienes permisos para ver los empleados de esta tienda.</p>;
+}
   return data?.map((employee: Employee) => {
     const fullName = employee.employeeName + " " + employee.employeeLastName
       return (

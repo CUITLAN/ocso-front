@@ -48,9 +48,7 @@ export default function LoginPage() {
           disabled={submitting}>
         {submitting ? "Enviando..." : "Iniciar Sesión"}
         </Button>
-        <p className="text-white">
-          ¿No tienes cuenta? <Link href="/signup" className="text-red-600 underline">Registrate</Link>
-        </p>
+        
       </div>
     </form>
   );

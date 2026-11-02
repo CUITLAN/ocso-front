@@ -16,6 +16,7 @@ export default async function FormNewLocation({store}: {store: string | string[]
     }
   })
   const dataManagers: Manager[] = await responseManagers.json()
+  if (!Array.isArray(dataManagers)) return null;
   const responseLocations = await fetch(`${API_URL}/locations`, {
     headers: {
       ...authHeaders()
